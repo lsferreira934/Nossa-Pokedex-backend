@@ -1,5 +1,5 @@
 require('dotenv').config();
-const pgp = require("pg-promise")();
+const pgp = require("pg-promise")({ capSQL: true });
 
 const conection = {
     user: process.env.USER_DB,

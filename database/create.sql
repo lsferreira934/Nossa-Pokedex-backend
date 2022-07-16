@@ -2,7 +2,7 @@ create schema pokemon
 
 create table pokemon.users(
     id text primary key,
-    nome text not null,
+    name text not null,
     password text not null,
     email text not null,
     date timestamp default now()
@@ -15,14 +15,14 @@ create table pokemon.pokemons(
     hp integer not null,
     attack integer not null,
     defense integer not null,
-    epecial_attack integer not null,
-    epecial_defense integer not null,
+    special_attack integer not null,
+    special_defense integer not null,
     speed integer not null,
     type_one text,
     type_two text,
     sprite text not null,
-    obility_one text,
-    obility_two text,
+    ability_one text,
+    ability_two text,
     date timestamp default now()
 )
 
