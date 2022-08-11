@@ -8,7 +8,7 @@ const catchPokemon = async (req, res, next) => {
         const pokemon = req.body;
 
         const findUser = await database.query(`SELECT * FROM pokemon.users WHERE id = $1`, [userId]);
-        console.log(findUser)
+
         if (!findUser.length) return res.status(400).send({ error: 'User not found' })
 
         if (!pokemon.id) return res.status(400).send({ error: "Pokemon not found" });
