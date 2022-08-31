@@ -1,21 +1,17 @@
 const express = require("express");
+const authRouter = require("./auth.router");
+const catchRouter = require("./catch.router");
+const pokemonRouter = require("./pokemon.router");
+const userPokemonRouter = require("./userPokemon.router");
+const userRouter = require("./user.router");
+
 const router = express.Router();
 
-const userController = require("../controllers/userControllers");
-const pokemonController = require("../controllers/pokemonControllers");
-const catchPokemonController = require("../controllers/catchPokemonControllers");
-const userPokemonController = require("../controllers/userPokemonControllers");
 
-router.get('/users', userController.listUsers);
-router.post('/user', userController.createUser);
-router.get('/user/:id',userController.getUser);
-router.put('/user/:id', userController.updateUser);
-router.delete('/user/:id',userController.deleteUser);
-
-router.get('/pokemons', pokemonController.listPokemons);
-
-router.post('/catch/:userId', catchPokemonController.catchPokemon);
-
-router.get('/mypokemons/:userId', userPokemonController.userPokemonList);
+router.use('/-/v1', authRouter);
+router.use('/-/v1', catchRouter);
+router.use('/-/v1', pokemonRouter);
+router.use('/-/v1', userPokemonRouter);
+router.use('/-/v1', userRouter);
 
 module.exports = router;

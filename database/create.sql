@@ -72,3 +72,6 @@ foreign key (role_id) references pokemon.roles(id)
 alter table pokemon.user_roles 
 add constraint roles_user_id_fk 
 foreign key (user_id) references pokemon.users(id)
+
+/* Insert ROLES */
+insert into pokemon.roles (id, name) values('1566f6cb-4f4e-46b4-96d1-8dce8461e401', 'user'), ('31d062bf-9879-4361-8875-654cbce98039', 'admin'),('da91c255-4d13-497a-ab71-743e6224eada', 'moderator')

@@ -12,13 +12,13 @@ const listUsers = async (req, res, next) => {
 };
 
 const createUser = async (req, res, next) => {
-  const userId = uuidv4();
-  const { name, email, password } = req.body.name;
+  const id = uuidv4();
+  const { name, email, password } = req.body;
 
   try {
     await database.query(
       `INSERT INTO pokemon.users (id, name, email, password) VALUES ($<id>,$<name>,$<email>,$<password>)`,
-      { name, email, password, userId }
+      { name, email, password, id }
     );
 
     return res.status(200).send();
@@ -32,7 +32,7 @@ const getUser = async (req, res, next) => {
     const userId = req.params.id;
 
     const findUser = await database.query(`SELECT * FROM pokemon.users WHERE id = $1`, [userId]);
-    if (!findUser.length) return res.status(400).send({ error: 'User not found' });
+    if (!findUser.length) return res.status(400).send({ message: 'User not found' });
 
     return res.status(200).send(findUser);
   } catch (error) {
@@ -49,7 +49,7 @@ const updateUser = async (req, res, next) => {
 
   try {
     const findUser = await database.query(`SELECT * FROM pokemon.users WHERE id = $1`, [userId]);
-    if (!findUser.length) return res.status(400).send({ error: 'User not found' })
+    if (!findUser.length) return res.status(400).send({ message: 'User not found' })
 
     const updatedUser = await database.query(
       `UPDATE pokemon.users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING id, name, email, password `,
@@ -67,7 +67,7 @@ const deleteUser = async (req, res, next) => {
     const userId = req.params.id
 
     const findUser = await database.query(`SELECT * FROM pokemon.users WHERE id = $1`, [userId]);
-    if (!findUser.length) return res.status(400).send({ error: 'User not found' })
+    if (!findUser.length) return res.status(400).send({ message: 'User not found' })
 
     await database.query(`DELETE FROM pokemon.users WHERE id = $1`, [id])
 
