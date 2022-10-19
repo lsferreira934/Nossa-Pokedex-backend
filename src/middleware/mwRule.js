@@ -1,6 +1,6 @@
-const database = require('../config/database');
+const database = require('../infra/database');
 
-const isAdmin = async (req, res, next) => {
+exports.isAdmin = async (req, res, next) => {
     try {
         const userId = req.userId;
 
@@ -14,7 +14,7 @@ const isAdmin = async (req, res, next) => {
     }
 };
 
-const isModerator = async (req, res, next) => {
+exports.isModerator = async (req, res, next) => {
     try {
         const userId = req.userId;
 
@@ -27,11 +27,3 @@ const isModerator = async (req, res, next) => {
         return res.status(400).send({ "error": error.message });
     }
 };
-
-
-const mwAuth = {
-    isAdmin,
-    isModerator,
-};
-
-module.exports = mwAuth;

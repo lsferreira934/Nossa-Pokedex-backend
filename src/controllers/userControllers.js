@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require("uuid");
-const database = require("../config/database");
+const database = require("../infra/database");
 
-const listUsers = async (req, res, next) => {
+exports.listUsers = async (req, res) => {
   try {
     const users = await database.query(`SELECT * FROM pokemon.users`);
 
@@ -11,7 +11,7 @@ const listUsers = async (req, res, next) => {
   };
 };
 
-const createUser = async (req, res, next) => {
+exports.createUser = async (req, res) => {
   const id = uuidv4();
   const { name, email, password } = req.body;
 
@@ -27,7 +27,7 @@ const createUser = async (req, res, next) => {
   };
 };
 
-const getUser = async (req, res, next) => {
+exports.getUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
@@ -36,11 +36,11 @@ const getUser = async (req, res, next) => {
 
     return res.status(200).send(findUser);
   } catch (error) {
-    return res.status(400).send({ "error": error.message });  
+    return res.status(400).send({ "error": error.message });
   };
 };
 
-const updateUser = async (req, res, next) => {
+exports.updateUser = async (req, res) => {
   const userId = req.params.id;
   const name = req.body.name;
   const email = req.body.email;
@@ -62,7 +62,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-const deleteUser = async (req, res, next) => {
+exports.deleteUser = async (req, res) => {
   try {
     const userId = req.params.id
 
@@ -77,5 +77,3 @@ const deleteUser = async (req, res, next) => {
     return res.status(400).send({ "error": error.message });
   }
 };
-
-module.exports = { listUsers, createUser, getUser, updateUser, deleteUser };

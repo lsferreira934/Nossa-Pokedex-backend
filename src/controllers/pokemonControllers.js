@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
-const database = require("../config/database");
+const database = require("../infra/database");
 const api = require("../api/pokeApi");
 
-const listPokemons = async (req, res, next) => {
+exports.listPokemons = async (req, res, next) => {
   try {
     const randomPokemons = [],
       pokemonsIds = [],
@@ -97,5 +97,3 @@ const listPokemons = async (req, res, next) => {
   };
 
 };
-
-module.exports = { listPokemons };

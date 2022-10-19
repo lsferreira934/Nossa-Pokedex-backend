@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require('uuid');
-const database = require('../config/database');
+const database = require('../infra/database');
 const api = require('../api/pokeApi');
 
-const catchPokemon = async (req, res, next) => {
+exports.catchPokemon = async (req, res) => {
     try {
         const { userId } = req.params;
         const pokemon = req.body;
@@ -52,8 +52,4 @@ const catchPokemon = async (req, res, next) => {
     } catch (error) {
         return res.status(400).send({ "error": error.message })
     }
-}
-
-
-
-module.exports = { catchPokemon }
+};

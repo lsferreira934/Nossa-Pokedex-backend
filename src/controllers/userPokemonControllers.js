@@ -1,6 +1,6 @@
-const database = require('../config/database');
+const database = require('../infra/database');
 
-const userPokemonList = async (req, res, next) => {
+exports.userPokemonList = async (req, res, next) => {
     const userId = req.params.userId;
 
     try {
@@ -19,6 +19,3 @@ const userPokemonList = async (req, res, next) => {
         return res.status(400).send(error);
     };
 };
-
-
-module.exports = { userPokemonList };

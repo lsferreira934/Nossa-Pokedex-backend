@@ -1,6 +1,6 @@
-const database = require('../config/database');
+const database = require('../infra/database');
 
-const checkRolesExisted = async (req, res, next) => {
+exports.checkRolesExisted = async (req, res, next) => {
     try {
         if (req.body.roles) {
             const getRoles = await database.query(`SELECT name FROM pokemon.roles`);
@@ -14,5 +14,3 @@ const checkRolesExisted = async (req, res, next) => {
         return res.status(400).send({ "error": error.message });
     };
 };
-
-module.exports = checkRolesExisted;

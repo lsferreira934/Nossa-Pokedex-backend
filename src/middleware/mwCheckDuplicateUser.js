@@ -1,6 +1,6 @@
-const database = require('../config/database');
+const database = require('../infra/database');
 
-const checkDuplicateUser = async (req, res, next) => {
+exports.checkDuplicateUser = async (req, res, next) => {
     try {
         const { email, name } = req.body;
 
@@ -12,5 +12,3 @@ const checkDuplicateUser = async (req, res, next) => {
         return res.status(400).send({ "error": error.message });
     };
 };
-
-module.exports = checkDuplicateUser;
