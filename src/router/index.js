@@ -1,8 +1,9 @@
 const express = require("express");
 const authRouter = require("./auth");
+const pokemonTrainer = require("./pokemonTrainer");
+
 const catchRouter = require("./catch");
 const pokemonRouter = require("./pokemon");
-const userPokemonRouter = require("./userPokemon");
 const userRouter = require("./user");
 
 const router = express.Router();
@@ -13,7 +14,7 @@ router.use(url, [
     authRouter,
     catchRouter,
     pokemonRouter,
-    userPokemonRouter,
+    pokemonTrainer,
     userRouter
 ]);
 
